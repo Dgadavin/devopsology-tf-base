@@ -1,0 +1,2 @@
+# devopsology-tf-base
+argocd
