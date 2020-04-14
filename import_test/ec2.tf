@@ -1,8 +1,8 @@
 resource "aws_instance" "example" {
-  ami = "ami-00eb20669e0990cb4"
+  ami = "ami-07ebfd5b3428b6f4d"
   instance_type = "t2.micro"
 
-  tags {
+  tags = {
     Name = "test-import"
   }
 }
