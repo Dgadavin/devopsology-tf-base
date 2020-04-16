@@ -76,3 +76,23 @@ terraform plan -var-file=environment/${TF_VAR_env}.tfvars
 terraform apply -var-file=environment/${TF_VAR_env}.tfvars
 terraform destroy -var-file=environment/${TF_VAR_env}.tfvars
 ```
+
+# Terraform modules
+
+## Simple ec2 creation with module from terraform registry
+
+```bash
+cd ec2_with_module
+terraform plan
+terraform apply
+```
+
+## Create base AWS setup with VPC with custom module
+
+```bash
+cd base_aws_setup
+export TF_VAR_env=prod
+terraform init -backend-config=config/${TF_VAR_env}-state.conf
+terraform apply -var-file=environment/${TF_VAR_env}.tfvars
+terraform destroy -var-file=environment/${TF_VAR_env}.tfvars
+```
