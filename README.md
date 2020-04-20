@@ -96,3 +96,26 @@ terraform init -backend-config=config/${TF_VAR_env}-state.conf
 terraform apply -var-file=environment/${TF_VAR_env}.tfvars
 terraform destroy -var-file=environment/${TF_VAR_env}.tfvars
 ```
+
+## Using secrets with AWS parameter store
+
+If you need to store secrets and lookup it from parameter store you can do next.
+
+Add secret parameter to the parameter store with AWS CLI:
+
+```bash
+aws ssm put-parameter --name "SECRET_NAME" --type "SecureString" --overwrite --value "YOUR_SECRET" --region <YOUR_REGION>
+```
+
+In terraform you can use such parameter:
+
+```hcl
+data "aws_ssm_parameter" "example" {
+  name = "SECRET_NAME"
+}
+```
+This will lookup your secret from AWS Parameter store. To use it in you code do this:
+
+```hcl
+data.aws_ssm_parameter.example.value
+```
